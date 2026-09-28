@@ -14,7 +14,7 @@ img.map{width:100%;border-radius:10px;border:1px solid var(--line);display:block
 .f input{flex:1;min-width:200px}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.05em;cursor:pointer;white-space:nowrap}.tw{overflow-x:auto}
 .pill{display:inline-block;padding:1px 8px;border-radius:99px;font-size:12px;font-weight:600;border:1px solid}.back{color:var(--back)}.add{color:var(--add)}.kept{color:var(--kept)}
-.src{font-size:12.5px}.hl{color:var(--mute);font-size:12.5px}footer{margin-top:40px;font-size:13px;color:var(--mute)}
+td:first-child{white-space:nowrap}.src{font-size:12.5px}.hl{color:var(--mute);font-size:12.5px}footer{margin-top:40px;font-size:13px;color:var(--mute)}
 </style></head><body><div class="w">
 <div class="k">FlockWatch · updated Sep 28, 2026</div>
 <h1>Flock camera contract decisions</h1>
@@ -42,7 +42,7 @@ const e=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;
 function r(){const q=document.getElementById("q").value.toLowerCase(),fs=document.getElementById("fs").value,fa=document.getElementById("fa").value;
 const rows=D.filter(x=>(!fs||x.state===fs)&&(!fa||x.group===fa)&&(!q||[x.place,x.state_name,x.agency,x.source,x.headline].join(" ").toLowerCase().includes(q)))
 .sort((a,b)=>(a[sk]>b[sk]?1:a[sk]<b[sk]?-1:0)*sd);
-document.getElementById("tb").innerHTML=rows.map(x=>`<tr><td>${e(x.date)}</td><td><b>${e(x.place)}</b>, ${e(x.state_name)}${x.agency?`<div class="hl">${e(x.agency)}</div>`:""}</td>
+document.getElementById("tb").innerHTML=rows.map(x=>`<tr><td>${e(x.date)}</td><td><b>${e(x.place)}</b>, ${e(x.state_name)}${x.agency&&x.agency.toLowerCase()!==x.place.toLowerCase()?`<div class="hl">${e(x.agency)}</div>`:""}</td>
 <td><span class="pill ${x.group}">${e(x.action)}</span></td><td class="src"><a href="${e(x.url)}" rel="noopener">${e(x.source)}</a><div class="hl">${e(x.headline)}</div></td></tr>`).join("");
 document.getElementById("n").textContent=rows.length+" of "+D.length+" entries"}
 ["q","fs","fa"].forEach(i=>document.getElementById(i).addEventListener("input",r));
